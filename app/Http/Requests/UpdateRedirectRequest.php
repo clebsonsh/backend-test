@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Redirect;
 use App\Rules\ValidUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +27,7 @@ class UpdateRedirectRequest extends FormRequest
     {
         return [
             'url' => ['required', 'string', 'max:255', new ValidUrl()],
-            'status' => ['nullable', 'string', 'in:active,inactive'],
+            'status' => ['nullable', 'string', 'in:' . implode(',', [Redirect::STATUS_ACTIVE, Redirect::STATUS_INACTIVE])],
         ];
     }
 }
