@@ -8,7 +8,6 @@ use App\Http\Requests\UpdateRedirectRequest;
 use App\Http\Resources\RedirectResource;
 use App\Models\Redirect;
 use Illuminate\Http\Response;
-use Vinkla\Hashids\Facades\Hashids;
 
 class RedirectController extends Controller
 {
@@ -44,11 +43,9 @@ class RedirectController extends Controller
      * @param  \App\Models\Redirect  $redirect
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRedirectRequest $request, string $code)
+    public function update(UpdateRedirectRequest $request, Redirect $redirect)
     {
         $validated = $request->validated();
-
-        $redirect = Redirect::where('id', Hashids::decode($code))->firstOrFail();
 
         $redirect->update($validated);
 
@@ -61,10 +58,8 @@ class RedirectController extends Controller
      * @param  \App\Models\Redirect  $redirect
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $code)
+    public function destroy(Redirect $redirect)
     {
-        $redirect = Redirect::where('id', Hashids::decode($code))->firstOrFail();
-
         $redirect->update(['status' => 'inactive']);
 
         $redirect->delete();
