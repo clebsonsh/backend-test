@@ -15,6 +15,11 @@ class Redirect extends Model
 
     use HasFactory, SoftDeletes;
 
+    public function resolveRouteBinding($code, $field = null)
+    {
+        return $this->where('id', Hashids::decode($code))->first() ?? abort(404, 'Redirect not found');
+    }
+
     public $fillable = ['status', 'url', 'last_accessed_at'];
 
     public $appends = ['code'];
