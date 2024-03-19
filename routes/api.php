@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\RedirectController;
+use App\Http\Controllers\Api\RedirectLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('redirects', RedirectController::class);
+
+Route::get('redirects/{redirect}/logs', RedirectLogController::class)->name('redirects.logs');
+
