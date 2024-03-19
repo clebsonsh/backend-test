@@ -29,6 +29,11 @@ class Redirect extends Model
         return Hashids::encode($this->id);
     }
 
+    public function isActive()
+    {
+        return $this->status === $this::STATUS_ACTIVE;
+    }
+
     public function logs()
     {
         return $this->hasMany(RedirectLog::class);
