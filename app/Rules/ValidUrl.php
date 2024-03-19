@@ -28,19 +28,14 @@ class ValidUrl implements Rule
      */
     public function passes($attribute, $value)
     {
-        switch (true) {
-            case !$this->isValidScheme($value):
-                $this->message = 'The URL must use the HTTPS protocol.';
-                return false;
-            case !$this->isUrlDifferentFromServer($value):
-                $this->message = 'The URL must be different from the server URL.';
-                return false;
-            case !$this->isUrlOnline($value):
-                $this->message = 'The URL must be online.';
-                return false;
-            default:
-                return true;
-        }
+        match (true) {
+            $this->isInvalidScheme($value) => $this->message = 'The URL must use the HTTPS protocol.',
+            $this->isUrlSameToServerUrl($value) => $this->message = 'The URL must be different from the server URL.',
+            $this->isUrlOffiline($value) => $this->message = 'The URL must be online.',
+            default => null,
+        };
+
+        return $this->message === '';
     }
 
     /**
@@ -58,26 +53,26 @@ class ValidUrl implements Rule
         return parse_url($url, PHP_URL_SCHEME) . '://' . parse_url($url, PHP_URL_HOST);
     }
 
-    private function isValidScheme(string $url): bool
+    private function isInvalidScheme(string $url): bool
     {
-        return in_array(parse_url($url, PHP_URL_SCHEME), ['https']);
+        return !in_array(parse_url($url, PHP_URL_SCHEME), ['https']);
     }
 
-    private function isUrlDifferentFromServer(string $url): bool
+    private function isUrlSameToServerUrl(string $url): bool
     {
-        return $this->parseUrl($url) !== $this->parseUrl(config('app.url'));
+        return $this->parseUrl($url) === $this->parseUrl(config('app.url'));
     }
 
-    private function isUrlOnline(string $url): bool
+    private function isUrlOffiline(string $url): bool
     {
         try {
             $response = Http::get($url);
         } catch (\Exception $e) {
-            return false;
+            return true;
         }
 
         $statusCode = $response->status();
 
-        return in_array($statusCode, [Response::HTTP_OK, Response::HTTP_CREATED]);
+        return !in_array($statusCode, [Response::HTTP_OK, Response::HTTP_CREATED]);
     }
 }
