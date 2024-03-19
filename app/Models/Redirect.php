@@ -10,6 +10,9 @@ use Vinkla\Hashids\Facades\Hashids;
 
 class Redirect extends Model
 {
+    const STATUS_ACTIVE = 'active';
+    const STATUS_INACTIVE = 'inactive';
+
     use HasFactory, SoftDeletes;
 
     public $fillable = ['status', 'url', 'last_accessed_at'];
