@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Vinkla\Hashids\Facades\Hashids;
@@ -11,6 +10,7 @@ use Vinkla\Hashids\Facades\Hashids;
 class Redirect extends Model
 {
     const STATUS_ACTIVE = 'active';
+
     const STATUS_INACTIVE = 'inactive';
 
     use HasFactory, SoftDeletes;
@@ -21,6 +21,10 @@ class Redirect extends Model
     }
 
     public $fillable = ['status', 'url', 'last_accessed_at'];
+
+    public $casts = [
+        'last_accessed_at' => 'datetime',
+    ];
 
     public $appends = ['code'];
 
