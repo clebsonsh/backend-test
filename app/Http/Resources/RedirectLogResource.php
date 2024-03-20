@@ -15,7 +15,6 @@ class RedirectLogResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'redirect_code' => $this->redirect->code,
             'ip_address' => $this->ip_address,
             'user_agent' => $this->user_agent,
             'referer' => $this->referer,
