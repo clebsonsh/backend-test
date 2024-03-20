@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\RedirectController;
 use App\Http\Controllers\Api\RedirectLogController;
+use App\Http\Controllers\Api\RedirectStatsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::apiResource('redirects', RedirectController::class);
 
 Route::get('redirects/{redirect}/logs', RedirectLogController::class)->name('redirects.logs');
 
+Route::get('redirects/{redirect}/stats', RedirectStatsController::class)->name('redirects.stats');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\RedirectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/r/{redirect}', RedirectController::class);
-
-});
