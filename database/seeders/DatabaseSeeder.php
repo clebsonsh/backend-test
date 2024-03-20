@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Redirect;
+use App\Models\RedirectLog;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Redirect::factory()
+            ->has(RedirectLog::factory()->count(random_int(40, 50)), 'logs')
+            ->create();
+        Redirect::factory()
+            ->has(RedirectLog::factory()->count(random_int(40, 50)), 'logs')
+            ->create();
+        Redirect::factory()
+            ->has(RedirectLog::factory()->count(random_int(40, 50)), 'logs')
+            ->create();
+        Redirect::factory()
+            ->has(RedirectLog::factory()->count(random_int(40, 50)), 'logs')
+            ->create();
+        Redirect::factory()
+            ->has(RedirectLog::factory()->count(random_int(40, 50)), 'logs')
+            ->create();
+
+        Redirect::factory(5)
+            ->has(RedirectLog::factory()->count(random_int(10, 20)), 'logs')
+            ->create();
+        Redirect::factory(5)
+            ->has(RedirectLog::factory()->count(random_int(20, 40)), 'logs')
+            ->create();
+        Redirect::factory(5)
+            ->has(RedirectLog::factory()->count(random_int(10, 50)), 'logs')
+            ->create();
     }
 }
