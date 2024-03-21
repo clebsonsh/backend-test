@@ -9,17 +9,7 @@ class UrlParser
         $baseUrl = self::getUrlWithoutQueryString($url);
         $queryString = self::getQueryStringArray($url);
 
-        $query = array_filter($query, function ($value) {
-            return !is_null($value);
-        });
-
-        $keysToForget = array_keys($query);
-
-        foreach ($keysToForget as $key) {
-            unset($queryString[$key]);
-        }
-
-        $query = array_merge($query, $queryString);
+        $query = array_merge($queryString, array_filter($query));
 
         if (empty($query)) {
             return $baseUrl;
