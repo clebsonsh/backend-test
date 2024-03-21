@@ -33,6 +33,7 @@ class ValidUrl implements Rule
             $this->isInvalidScheme($value) => $this->message = 'The URL must use the HTTPS protocol.',
             $this->isUrlSameToServerUrl($value) => $this->message = 'The URL must be different from the server URL.',
             $this->isUrlOffiline($value) => $this->message = 'The URL must be online.',
+            $this->doesUrlHaveNullQueryParams($value) => $this->message = 'The URL must not have null query parameters.',
             default => null,
         };
 
@@ -80,5 +81,25 @@ class ValidUrl implements Rule
         $statusCode = $response->status();
 
         return !in_array($statusCode, [Response::HTTP_OK, Response::HTTP_CREATED]);
+    }
+
+    private function doesUrlHaveNullQueryParams(string $url): bool
+    {
+        $query = parse_url($url, PHP_URL_QUERY);
+
+        if ($query === null) {
+            return false;
+        }
+
+        $querys = explode('&', $query);
+
+        foreach ($querys as $query) {
+            [$key, $value] = explode('=', $query);
+            if (!$value) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
