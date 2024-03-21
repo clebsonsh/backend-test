@@ -91,9 +91,9 @@ class ValidUrl implements Rule
             return false;
         }
 
-        $querys = explode('&', $query);
+        $queries = explode('&', $query);
 
-        foreach ($querys as $query) {
+        foreach ($queries as $query) {
             [$key, $value] = explode('=', $query);
             if (!$value) {
                 return true;
