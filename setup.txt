@@ -1,0 +1,19 @@
+git clone https://github.com/clebsonsh/backend-test.git
+
+cd backend-test
+
+cp .env.example .env
+
+composer install
+
+php artisan key:generate
+
+touch database/database.sqlite
+
+php artisan migrate --seed
+
+php artisan test
+
+php artisan serve
+
+go to http://127.0.0.1:8000/api/redirects
