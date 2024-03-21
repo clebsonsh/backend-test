@@ -29,6 +29,7 @@ class ValidUrl implements Rule
     public function passes($attribute, $value)
     {
         match (true) {
+            $this->isUrlInvalid($value) => $this->message = 'The URL is not valid.',
             $this->isInvalidScheme($value) => $this->message = 'The URL must use the HTTPS protocol.',
             $this->isUrlSameToServerUrl($value) => $this->message = 'The URL must be different from the server URL.',
             $this->isUrlOffiline($value) => $this->message = 'The URL must be online.',
@@ -46,6 +47,11 @@ class ValidUrl implements Rule
     public function message()
     {
         return $this->message;
+    }
+
+    private function isUrlInvalid(string $url): bool
+    {
+        return !filter_var($url, FILTER_VALIDATE_URL);
     }
 
     private function parseUrl(string $url): string
