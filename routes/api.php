@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('redirects', RedirectController::class);
+Route::apiResource('redirects', RedirectController::class)->except('show');
 
 Route::get('redirects/{redirect}/logs', RedirectLogController::class)->name('redirects.logs');
 
