@@ -28,20 +28,20 @@ Esse documento visa coletar feedbacks sobre o teste de desenvolvimento. Desde o 
 
 1 - O que você achou do teste?
 
-> Resposta
+> Muito bem montado e explicado.
 
 2 - Levou mais ou menos tempo do que você esperava?
 
-> Resposta
+> Tive menos tempo do que eu esperava disponível para fazer o teste.
 
 3 - Teve imprevistos? Quais?
 
-> Resposta
+> Não exatamente imprevistos, só uma semana bem corrida que não me permitiu focar mais no teste
 
 4 - Existem pontos que você gostaria de ter melhorado?
 
-> Resposta
+> Não consegui fazer todos os testes solicitados e se tivesse mais tempo teria refatorado alguns pontos do código que estão com muitas responsabilidades
 
 5 - Quais falhas você encontrou na estrutura do projeto?
 
-> Resposta
+> A versão do Laravel utilizada é antiga. Se tivesse mais tempo eu teria atualizado antes de começar o teste.
